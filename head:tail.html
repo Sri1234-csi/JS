@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coin Toss Game</title>
+</head>
+<body>
+
+  <h2>Guess the Coin Toss!</h2>
+  <button onclick="playGame('Heads')">Heads</button>
+  <button onclick="playGame('Tails')">Tails</button>
+
+  <p id="result"></p>
+
+  <script>
+    function playGame(guess) {
+      const outcomes = ['Heads', 'Tails'];
+      const randomIndex = Math.floor(Math.random() * 2);
+      const coin = outcomes[randomIndex];
+
+      let resultText = `You guessed: ${guess} | Coin: ${coin} — `;
+
+      if (guess === coin) {
+        resultText += "🎉 You win!";
+      } else {
+        resultText += "❌ You lose!";
+      }
+
+      document.getElementById("result").innerText = resultText;
+    }
+  </script>
+
+</body>
+</html>
