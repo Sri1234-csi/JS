@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Amazon Cart Total</title>
+</head>
+<body>
+  <h2>Amazon Cart</h2>
+
+  <div>
+    <label>Item Name: <input type="text" id="itemName"></label><br>
+    <label>Price: <input type="number" id="itemPrice"></label><br>
+    <label>Quantity: <input type="number" id="itemQuantity"></label><br>
+    <button onclick="addToCart()">Add to Cart</button>
+  </div>
+
+  <h3>Cart Items:</h3>
+  <ul id="cartList"></ul>
+
+  <h3>Total Amount: ₹<span id="totalAmount">0</span></h3>
+
+  <script>
+    let cart = [];
+
+    function addToCart() {
+      const name = document.getElementById("itemName").value;
+      const price = parseFloat(document.getElementById("itemPrice").value);
+      const quantity = parseInt(document.getElementById("itemQuantity").value);
+
+      if (!name || isNaN(price) || isNaN(quantity)) {
+        alert("Please fill all fields correctly");
+        return;
+      }
+
+      cart.push({ name, price, quantity });
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const cartList = document.getElementById("cartList");
+      const totalAmountSpan = document.getElementById("totalAmount");
+      cartList.innerHTML = "";
+
+      let total = 0;
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - ₹${item.price} x ${item.quantity} = ₹${itemTotal}`;
+        cartList.appendChild(li);
+      });
+
+      totalAmountSpan.textContent = total.toFixed(2);
+    }
+  </script>
+</body>
+</html>
