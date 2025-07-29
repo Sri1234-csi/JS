@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini Calculator</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .calc { background: #1c1c1c; padding: 20px; border-radius: 20px; width: 260px; }
+    .display { background: #000; color: #fff; text-align: right; font-size: 2.5rem; padding: 10px; margin-bottom: 10px; border-radius: 10px; }
+    .btns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    button { font-size: 1.3rem; padding: 15px; border: none; border-radius: 50%; background: #333; color: #fff; }
+    .op { background: #f90; }
+    .grey { background: #a5a5a5; color: #000; }
+    .zero { grid-column: span 2; border-radius: 30px; text-align: left; padding-left: 25px; }
+  </style>
+</head>
+<body>
+  <div class="calc">
+    <div id="out" class="display">0</div>
+    <div class="btns">
+      <button class="grey" onclick="clr()">AC</button>
+      <button class="grey" onclick="neg()">±</button>
+      <button class="grey" onclick="pc()">%</button>
+      <button class="op" onclick="setOp('/')">÷</button>
+      <button onclick="add('7')">7</button>
+      <button onclick="add('8')">8</button>
+      <button onclick="add('9')">9</button>
+      <button class="op" onclick="setOp('*')">×</button>
+      <button onclick="add('4')">4</button>
+      <button onclick="add('5')">5</button>
+      <button onclick="add('6')">6</button>
+      <button class="op" onclick="setOp('-')">−</button>
+      <button onclick="add('1')">1</button>
+      <button onclick="add('2')">2</button>
+      <button onclick="add('3')">3</button>
+      <button class="op" onclick="setOp('+')">+</button>
+      <button class="zero" onclick="add('0')">0</button>
+      <button onclick="add('.')">.</button>
+      <button class="op" onclick="calc()">=</button>
+    </div>
+  </div>
+
+  <script>
+    let out = document.getElementById('out'), a = '', b = '', op = null;
+    function add(n) { b += n; out.textContent = b; }
+    function clr() { a = b = ''; op = null; out.textContent = '0'; }
+    function setOp(o) { if (b) a = b, b = '', op = o; }
+    function calc() {
+      if (op && a && b) {
+        a = eval(`${parseFloat(a)}${op}${parseFloat(b)}`).toString();
+        out.textContent = a; b = ''; op = null;
+      }
+    }
+    function neg() { b = (parseFloat(b || '0') * -1).toString(); out.textContent = b; }
+    function pc() { b = (parseFloat(b || '0') / 100).toString(); out.textContent = b; }
+  </script>
+</body>
+</html>
