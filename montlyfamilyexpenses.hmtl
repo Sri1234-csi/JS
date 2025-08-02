@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Monthly Expense Calculator</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input { width: 100%; margin: 5px 0; padding: 8px; }
+    button { padding: 10px 20px; margin-top: 10px; }
+    .result { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Monthly Expense Calculator</h2>
+  
+  <label>Rent:</label>
+  <input type="number" id="rent" placeholder="e.g. 10000">
+  
+  <label>Food:</label>
+  <input type="number" id="food" placeholder="e.g. 3000">
+  
+  <label>Transport:</label>
+  <input type="number" id="transport" placeholder="e.g. 1500">
+  
+  <label>Utilities:</label>
+  <input type="number" id="utilities" placeholder="e.g. 1200">
+  
+  <label>Others:</label>
+  <input type="number" id="others" placeholder="e.g. 2000">
+  
+  <button onclick="calculateTotal()">Calculate</button>
+  
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculateTotal() {
+      const rent = +document.getElementById("rent").value || 0;
+      const food = +document.getElementById("food").value || 0;
+      const transport = +document.getElementById("transport").value || 0;
+      const utilities = +document.getElementById("utilities").value || 0;
+      const others = +document.getElementById("others").value || 0;
+
+      const total = rent + food + transport + utilities + others;
+
+      document.getElementById("result").textContent = 
+        `Your total monthly expenses are ₹${total}`;
+    }
+  </script>
+
+</body>
+</html>
